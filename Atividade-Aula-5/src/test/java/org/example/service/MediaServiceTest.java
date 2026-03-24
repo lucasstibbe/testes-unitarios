@@ -4,6 +4,7 @@ import org.example.model.Aluno;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MediaServiceTest {
 
@@ -57,5 +58,15 @@ public class MediaServiceTest {
         String resultado = service.verificarStatus(3.5);
 
         assertEquals("Reprovado", resultado);
+    }
+
+    //Sétimo teste: Validar a nota entre 0 e 10
+    @Test
+    public void testNotaInvalida() {
+        Aluno aluno = new Aluno("Teste", 11.0, 8.0, 9.0);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            service.calcularMedia(aluno);
+        });
     }
 }
