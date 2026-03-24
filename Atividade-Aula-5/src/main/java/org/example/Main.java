@@ -14,14 +14,9 @@ public class Main {
         System.out.println("Digite o nome do aluno:");
         String nome = scanner.nextLine();
 
-        System.out.println("Digite a primeira nota:");
-        double nota1 = scanner.nextDouble();
-
-        System.out.println("Digite a segunda nota:");
-        double nota2 = scanner.nextDouble();
-
-        System.out.println("Digite a terceira nota:");
-        double nota3 = scanner.nextDouble();
+        double nota1 = lerNotaValida(scanner, "Digite a primeira nota:");
+        double nota2 = lerNotaValida(scanner, "Digite a segunda nota:");
+        double nota3 = lerNotaValida(scanner, "Digite a terceira nota:");
 
         Aluno aluno = new Aluno(nome, nota1, nota2, nota3);
 
@@ -32,5 +27,20 @@ public class Main {
         System.out.println("Status: " + status);
 
         scanner.close();
+    }
+
+    private static double lerNotaValida(Scanner scanner, String mensagem) {
+        double nota;
+
+        while (true) {
+            System.out.println(mensagem);
+            nota = scanner.nextDouble();
+
+            if (nota >= 0 && nota <= 10) {
+                return nota;
+            } else {
+                System.out.println("Nota inválida! Digite um valor entre 0 e 10.");
+            }
+        }
     }
 }
